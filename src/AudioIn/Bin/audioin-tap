@@ -1,0 +1,46 @@
+#!/usr/bin/perl
+# audioin-tap: citac zvuka sa ulaza za jedan plejer. LMS ga pokrece iz custom-convert.conf
+# ([audioin-tap] $URL$ | [flac] ...), on se poveze na socket pomocnog procesa audioin-capture,
+# posalje odakle cita i prepisuje PCM (stereo S24_3LE) na stdout.
+# Pauza na plejeru: LMS prestane da cita cev, ovaj proces se blokira na pisanju, socket se napuni i
+# pomocni proces stoji na poziciji ovog citaca (timeshift). Kraj: EOF sa bilo koje strane.
+#
+# URL: audioin://live[?delay=SEKUNDI][&pos=FREJM]
+
+use strict;
+use warnings;
+
+use FindBin ();
+use lib "$FindBin::RealBin/../../..";    # .../Plugins/AudioIn/Bin -> koren koji sadrzi Plugins/
+
+use IO::Socket::UNIX ();
+use Socket ();
+use Plugins::AudioIn::Paths;
+
+my $url = shift @ARGV // 'audioin://live';
+my %q = $url =~ /[?&]([a-z]+)=([0-9.]+)/g;
+my $hello = defined $q{pos} ? qq({"pos":$q{pos}}) : sprintf('{"start":"live","delay":%s}', $q{delay} // 3);
+
+my $sock;
+for my $path (Plugins::AudioIn::Paths::existing_sockets()) {
+	$sock = IO::Socket::UNIX->new(Type => Socket::SOCK_STREAM(), Peer => $path) and last;
+}
+die "audioin-tap: pomocni proces nije pokrenut (nema socket-a)\n" unless $sock;
+
+binmode $sock;
+binmode STDOUT;
+syswrite($sock, "$hello\n") or die "audioin-tap: $!\n";
+
+$SIG{PIPE} = sub { exit 0 };
+while (1) {
+	my $n = sysread($sock, my $buf, 65536);
+	next if !defined $n && $!{EINTR};
+	last unless $n;
+	my $off = 0;
+	while ($off < $n) {
+		my $w = syswrite(STDOUT, $buf, $n - $off, $off);
+		if (!defined $w) { next if $!{EINTR}; exit 0 }
+		$off += $w;
+	}
+}
+exit 0;

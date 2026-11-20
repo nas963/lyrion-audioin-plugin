@@ -1,0 +1,635 @@
+PLUGIN_AUDIOIN
+	EN	Audio In
+	SR	Audio ulaz
+
+PLUGIN_AUDIOIN_DESC
+	EN	Listen to and record an analog source (turntable, cassette, tuner...) connected to the server's sound card.
+	SR	Slušanje i snimanje analognog izvora (gramofon, kasetofon, tjuner...) priključenog na zvučnu karticu servera.
+
+PLUGIN_AUDIOIN_NOT_OPEN
+	EN	The audio input is not open.
+	SR	Audio ulaz nije otvoren.
+
+PLUGIN_AUDIOIN_UI_INPUT
+	EN	Input
+	SR	Ulaz
+
+PLUGIN_AUDIOIN_UI_OPEN
+	EN	Open input
+	SR	Otvori ulaz
+
+PLUGIN_AUDIOIN_UI_CLOSE
+	EN	Close input
+	SR	Zatvori ulaz
+
+PLUGIN_AUDIOIN_UI_CLOSED
+	EN	Input closed
+	SR	Ulaz je zatvoren
+
+PLUGIN_AUDIOIN_UI_BUFFERED
+	EN	Buffer
+	SR	Bafer
+
+PLUGIN_AUDIOIN_UI_LISTENERS
+	EN	Players listening
+	SR	Plejera sluša
+
+PLUGIN_AUDIOIN_UI_LEVEL
+	EN	Level
+	SR	Nivo
+
+PLUGIN_AUDIOIN_UI_CLIP
+	EN	Clipping
+	SR	Klipovanje
+
+PLUGIN_AUDIOIN_UI_LISTEN
+	EN	Listen
+	SR	Slušaj
+
+PLUGIN_AUDIOIN_UI_LIVE
+	EN	Back to live
+	SR	Uživo
+
+PLUGIN_AUDIOIN_UI_PLAYER
+	EN	Player
+	SR	Plejer
+
+PLUGIN_AUDIOIN_UI_BEHIND
+	EN	behind live
+	SR	iza uživo
+
+PLUGIN_AUDIOIN_UI_RECORDING
+	EN	Recording
+	SR	Snimanje
+
+PLUGIN_AUDIOIN_UI_RECORD
+	EN	Record
+	SR	Snimaj
+
+PLUGIN_AUDIOIN_UI_PAUSE
+	EN	Pause
+	SR	Pauza
+
+PLUGIN_AUDIOIN_UI_RESUME
+	EN	Resume
+	SR	Nastavi
+
+PLUGIN_AUDIOIN_UI_STOP
+	EN	Stop
+	SR	Stop
+
+PLUGIN_AUDIOIN_UI_MARKER
+	EN	New track (marker)
+	SR	Nova pesma (marker)
+
+PLUGIN_AUDIOIN_UI_NEXT_PART
+	EN	Next side
+	SR	Sledeća strana
+
+PLUGIN_AUDIOIN_UI_PART
+	EN	Side / part
+	SR	Strana / deo
+
+PLUGIN_AUDIOIN_UI_MARKERS
+	EN	Markers
+	SR	Markeri
+
+PLUGIN_AUDIOIN_UI_XRUNS
+	EN	Lost samples (xrun)
+	SR	Izgubljeni uzorci (xrun)
+
+PLUGIN_AUDIOIN_UI_SESSION
+	EN	Album
+	SR	Album
+
+PLUGIN_AUDIOIN_UI_NEW_SESSION
+	EN	New album
+	SR	Nov album
+
+PLUGIN_AUDIOIN_UI_SESSIONS
+	EN	Recordings
+	SR	Snimci
+
+PLUGIN_AUDIOIN_UI_SELECT
+	EN	Select
+	SR	Izaberi
+
+PLUGIN_AUDIOIN_UI_SAVE
+	EN	Save
+	SR	Sačuvaj
+
+PLUGIN_AUDIOIN_UI_ARTIST
+	EN	Artist
+	SR	Izvođač
+
+PLUGIN_AUDIOIN_UI_ALBUM
+	EN	Album title
+	SR	Naziv albuma
+
+PLUGIN_AUDIOIN_UI_YEAR
+	EN	Year
+	SR	Godina
+
+PLUGIN_AUDIOIN_UI_TYPE
+	EN	Source
+	SR	Izvor
+
+PLUGIN_AUDIOIN_UI_TYPE_VINYL
+	EN	Vinyl
+	SR	Ploča
+
+PLUGIN_AUDIOIN_UI_TYPE_CASSETTE
+	EN	Cassette
+	SR	Kaseta
+
+PLUGIN_AUDIOIN_UI_TYPE_RADIO
+	EN	Tuner / radio
+	SR	Tjuner / radio
+
+PLUGIN_AUDIOIN_UI_TYPE_LIVE
+	EN	Live / instrument
+	SR	Uživo / instrument
+
+PLUGIN_AUDIOIN_UI_TYPE_OTHER
+	EN	Other
+	SR	Ostalo
+
+PLUGIN_AUDIOIN_UI_NO_SESSION
+	EN	No album selected: recording creates a new one.
+	SR	Nije izabran album: snimanje pravi nov.
+
+PLUGIN_AUDIOIN_UI_TAKES
+	EN	Takes
+	SR	Snimci
+
+PLUGIN_AUDIOIN_UI_NONE
+	EN	none yet
+	SR	još nema
+
+PLUGIN_AUDIOIN_UI_SETTINGS
+	EN	Settings
+	SR	Podešavanja
+
+PLUGIN_AUDIOIN_ERR_HELPER
+	EN	The capture process is not running.
+	SR	Proces za snimanje ne radi.
+
+PLUGIN_AUDIOIN_ERR_NO_DEVICE
+	EN	No input device is set (Settings).
+	SR	Ulazni uređaj nije podešen (Podešavanja).
+
+PLUGIN_AUDIOIN_ERR_NO_FILE
+	EN	The test file is missing.
+	SR	Test fajl ne postoji.
+
+PLUGIN_AUDIOIN_ERR_BUSY
+	EN	The sound card is used by another program.
+	SR	Zvučnu karticu koristi drugi program.
+
+PLUGIN_AUDIOIN_ERR_BAD_FORMAT
+	EN	The sound card does not support this format or sample rate.
+	SR	Zvučna kartica ne podržava ovaj format ili frekvenciju.
+
+PLUGIN_AUDIOIN_ERR_PERMISSION
+	EN	No permission for the sound card (the server user must be in group "audio").
+	SR	Nema prava na zvučnu karticu (korisnik servera mora biti u grupi „audio“).
+
+PLUGIN_AUDIOIN_ERR_DEVICE_LOST
+	EN	The sound card disappeared (unplugged?).
+	SR	Zvučna kartica je nestala (izvučen kabl?).
+
+PLUGIN_AUDIOIN_ERR_NOT_OPEN
+	EN	The input is not open.
+	SR	Ulaz nije otvoren.
+
+PLUGIN_AUDIOIN_ERR_NO_PLAYER
+	EN	Choose a player.
+	SR	Izaberi plejer.
+
+PLUGIN_AUDIOIN_ERR_RECORDING
+	EN	Recording is in progress.
+	SR	Snimanje je u toku.
+
+PLUGIN_AUDIOIN_ERR_NOT_RECORDING
+	EN	Nothing is being recorded.
+	SR	Ništa se ne snima.
+
+PLUGIN_AUDIOIN_ERR_FAILED
+	EN	The command failed.
+	SR	Komanda nije uspela.
+
+PLUGIN_AUDIOIN_UI_EDIT
+	EN	Edit tracks
+	SR	Uredi pesme
+
+PLUGIN_AUDIOIN_UI_CLOSE_EDITOR
+	EN	Close
+	SR	Zatvori
+
+PLUGIN_AUDIOIN_UI_ADD_SPLIT
+	EN	Split at cursor
+	SR	Granica na kursoru
+
+PLUGIN_AUDIOIN_UI_ANALYZE
+	EN	Suggest tracks again
+	SR	Ponovo predloži pesme
+
+PLUGIN_AUDIOIN_UI_EDITOR_HELP
+	EN	Click the waveform to set the cursor, drag a boundary to move it. ▶ plays from 3 s before the track start on the selected player.
+	SR	Klik na talasni oblik postavlja kursor, granica se pomera prevlačenjem. ▶ pušta od 3 s pre početka pesme na izabranom plejeru.
+
+PLUGIN_AUDIOIN_UI_KEEP
+	EN	Keep
+	SR	Čuvaj
+
+PLUGIN_AUDIOIN_UI_START
+	EN	Start
+	SR	Početak
+
+PLUGIN_AUDIOIN_UI_LENGTH
+	EN	Length
+	SR	Trajanje
+
+PLUGIN_AUDIOIN_UI_TITLE
+	EN	Title
+	SR	Naslov
+
+PLUGIN_AUDIOIN_UI_MERGE
+	EN	Join with previous
+	SR	Spoji sa prethodnom
+
+PLUGIN_AUDIOIN_UI_EXPORT
+	EN	Export album
+	SR	Izvezi album
+
+PLUGIN_AUDIOIN_UI_EXPORTING
+	EN	Exporting
+	SR	Izvoz
+
+PLUGIN_AUDIOIN_UI_EXPORTED
+	EN	Exported to
+	SR	Izvezeno u
+
+PLUGIN_AUDIOIN_UI_SAVED
+	EN	Saved
+	SR	Sačuvano
+
+PLUGIN_AUDIOIN_UI_ESTIMATE
+	EN	estimated boundary (no pause found)
+	SR	procenjena granica (nema pauze)
+
+PLUGIN_AUDIOIN_ERR_NO_TRACKS
+	EN	No tracks to export (all unchecked?).
+	SR	Nema pesama za izvoz (sve isključene?).
+
+PLUGIN_AUDIOIN_ERR_EXPORT_BUSY
+	EN	Busy: another export is running.
+	SR	Zauzeto: drugi izvoz je u toku.
+
+PLUGIN_AUDIOIN_SET_SAVED
+	EN	Settings saved.
+	SR	Podešavanja su sačuvana.
+
+PLUGIN_AUDIOIN_SET_SOURCE
+	EN	Source
+	SR	Izvor zvuka
+
+PLUGIN_AUDIOIN_SET_SOURCE_DESC
+	EN	Sound card input, or a test file played in real time (for development without a card).
+	SR	Ulaz zvučne kartice, ili test fajl koji se pušta u realnom vremenu (za razvoj bez kartice).
+
+PLUGIN_AUDIOIN_SET_SOURCE_ALSA
+	EN	Sound card
+	SR	Zvučna kartica
+
+PLUGIN_AUDIOIN_SET_SOURCE_FILE
+	EN	Test file
+	SR	Test fajl
+
+PLUGIN_AUDIOIN_SET_DEVICE
+	EN	Input device
+	SR	Ulazni uređaj
+
+PLUGIN_AUDIOIN_SET_DEVICE_DESC
+	EN	Capture devices found on the server. The card is selected by name, so it keeps working if the USB order changes.
+	SR	Ulazni uređaji pronađeni na serveru. Kartica se bira po imenu, pa radi i kad se promeni redosled USB uređaja.
+
+PLUGIN_AUDIOIN_SET_NO_DEVICES
+	EN	No input devices found
+	SR	Nema ulaznih uređaja
+
+PLUGIN_AUDIOIN_SET_NOT_PRESENT
+	EN	not connected
+	SR	nije priključen
+
+PLUGIN_AUDIOIN_SET_CHANNELS
+	EN	Inputs
+	SR	Ulazi
+
+PLUGIN_AUDIOIN_SET_CHANNELS_DESC
+	EN	Stereo pair of the card's inputs, or one mono input copied to both channels (guitar, microphone).
+	SR	Stereo par ulaza kartice, ili jedan mono ulaz u oba kanala (gitara, mikrofon).
+
+PLUGIN_AUDIOIN_SET_STEREO
+	EN	Stereo
+	SR	Stereo
+
+PLUGIN_AUDIOIN_SET_MONO
+	EN	Mono
+	SR	Mono
+
+PLUGIN_AUDIOIN_SET_RATE
+	EN	Resolution
+	SR	Rezolucija
+
+PLUGIN_AUDIOIN_SET_RATE_DESC
+	EN	Only what the card supports is offered. Recordings are always stored as 24-bit FLAC.
+	SR	Nudi se samo ono što kartica podržava. Snimci se uvek čuvaju kao 24-bitni FLAC.
+
+PLUGIN_AUDIOIN_SET_UNKNOWN_CAPS
+	EN	The card does not report its capabilities: if opening fails, choose another rate.
+	SR	Kartica ne javlja šta podržava: ako otvaranje ne uspe, izaberi drugu frekvenciju.
+
+PLUGIN_AUDIOIN_SET_TEST_FILE
+	EN	Test file
+	SR	Test fajl
+
+PLUGIN_AUDIOIN_SET_TEST_FILE_DESC
+	EN	Full path to a .flac or .wav file (used only when the source is "Test file").
+	SR	Puna putanja do .flac ili .wav fajla (koristi se samo kad je izvor „Test fajl“).
+
+PLUGIN_AUDIOIN_SET_SOURCE_TYPE
+	EN	Default source type
+	SR	Podrazumevana vrsta izvora
+
+PLUGIN_AUDIOIN_SET_SOURCE_TYPE_DESC
+	EN	For new albums: names of sides/parts and the MEDIA tag.
+	SR	Za nove albume: nazivi strana/delova i MEDIA tag.
+
+PLUGIN_AUDIOIN_SET_PREROLL
+	EN	Pre-recording (s)
+	SR	Pred-snimanje (s)
+
+PLUGIN_AUDIOIN_SET_PREROLL_DESC
+	EN	A recording starts this many seconds before Record was pressed, so the needle drop is not missed.
+	SR	Snimak počinje ovoliko sekundi pre pritiska na Snimaj, da se ne propusti spuštanje igle.
+
+PLUGIN_AUDIOIN_SET_LISTEN_DELAY
+	EN	Listening delay (s)
+	SR	Kašnjenje slušanja (s)
+
+PLUGIN_AUDIOIN_SET_LISTEN_DELAY_DESC
+	EN	Players start this far behind the input; it absorbs clock differences between the card and the player.
+	SR	Plejeri počinju ovoliko iza ulaza; to pokriva razliku taktova kartice i plejera.
+
+PLUGIN_AUDIOIN_SET_REACTION
+	EN	Marker reaction time (s)
+	SR	Vreme reakcije za marker (s)
+
+PLUGIN_AUDIOIN_SET_REACTION_DESC
+	EN	When you listen directly (not through a Lyrion player), a marker is placed this much before the button press.
+	SR	Kad slušaš direktno (ne preko Lyrion plejera), marker se postavlja ovoliko pre pritiska.
+
+PLUGIN_AUDIOIN_SET_RING
+	EN	Timeshift buffer (min)
+	SR	Bafer za pauzu (min)
+
+PLUGIN_AUDIOIN_SET_RING_DESC
+	EN	How long a paused player can resume where it stopped. Uses RAM: about 35 MB per minute at 24/96.
+	SR	Koliko dugo pauziran plejer može da nastavi gde je stao. Koristi RAM: oko 35 MB po minutu za 24/96.
+
+PLUGIN_AUDIOIN_SET_IDLE
+	EN	Close input after (min)
+	SR	Zatvori ulaz posle (min)
+
+PLUGIN_AUDIOIN_SET_IDLE_DESC
+	EN	The input is closed when nobody listens or records for this long (0 = never). A closed input frees the card.
+	SR	Ulaz se zatvara kad niko ne sluša i ne snima ovoliko dugo (0 = nikad). Zatvoren ulaz oslobađa karticu.
+
+PLUGIN_AUDIOIN_SET_FLAC_LEVEL
+	EN	FLAC compression level
+	SR	FLAC nivo kompresije
+
+PLUGIN_AUDIOIN_SET_RIPS_DIR
+	EN	Recordings folder
+	SR	Folder za snimke
+
+PLUGIN_AUDIOIN_SET_RIPS_DIR_DESC
+	EN	Raw recordings (hidden .sessions folder) and exported albums. Empty = default.
+	SR	Snimci (skriven folder .sessions) i izvezeni albumi. Prazno = podrazumevano.
+
+PLUGIN_AUDIOIN_SET_RES_TAG
+	EN	Resolution in album folder name
+	SR	Rezolucija u nazivu foldera albuma
+
+PLUGIN_AUDIOIN_SET_RES_TAG_DESC
+	EN	For example "Album (1979) [24-96]".
+	SR	Na primer „Album (1979) [24-96]“.
+
+PLUGIN_AUDIOIN_SET_ERR_SOURCE
+	EN	Invalid source.
+	SR	Neispravan izvor.
+
+PLUGIN_AUDIOIN_SET_ERR_DEVICE
+	EN	Choose an input device.
+	SR	Izaberi ulazni uređaj.
+
+PLUGIN_AUDIOIN_SET_ERR_FORMAT
+	EN	Invalid sample format.
+	SR	Neispravan format uzoraka.
+
+PLUGIN_AUDIOIN_SET_ERR_RATE
+	EN	Invalid sample rate.
+	SR	Neispravna frekvencija.
+
+PLUGIN_AUDIOIN_SET_ERR_CHANNELS
+	EN	Invalid input selection.
+	SR	Neispravan izbor ulaza.
+
+PLUGIN_AUDIOIN_SET_ERR_TEST_FILE
+	EN	The test file must be an existing .flac or .wav file (full path).
+	SR	Test fajl mora biti postojeći .flac ili .wav fajl (puna putanja).
+
+PLUGIN_AUDIOIN_SET_ERR_NUMBER
+	EN	A number is out of range.
+	SR	Broj je van dozvoljenog opsega.
+
+PLUGIN_AUDIOIN_SET_ERR_RIPS_DIR
+	EN	The recordings folder must be a full path that can be created.
+	SR	Folder za snimke mora biti puna putanja koja može da se napravi.
+
+PLUGIN_AUDIOIN_UI_MB_SEARCH
+	EN	Find on MusicBrainz
+	SR	Pronađi na MusicBrainz-u
+
+PLUGIN_AUDIOIN_UI_MB_SEARCHING
+	EN	Searching MusicBrainz...
+	SR	Pretraga MusicBrainz-a...
+
+PLUGIN_AUDIOIN_UI_MB_NONE
+	EN	Nothing found. Check artist and album, or enter titles by hand in the editor.
+	SR	Ništa nije pronađeno. Proveri izvođača i album, ili upiši naslove ručno u editoru.
+
+PLUGIN_AUDIOIN_UI_MB_PICK
+	EN	Choose the release matching your record (format, country, year, label):
+	SR	Izaberi izdanje koje odgovara tvojoj ploči (format, zemlja, godina, izdavač):
+
+PLUGIN_AUDIOIN_UI_MB_APPLY
+	EN	Use
+	SR	Primeni
+
+PLUGIN_AUDIOIN_UI_MB_APPLIED
+	EN	Album data applied; recorded sides were split again using the track lengths.
+	SR	Podaci albuma su primenjeni; snimljene strane su ponovo podeljene prema trajanjima pesama.
+
+PLUGIN_AUDIOIN_UI_TRACKS_N
+	EN	tracks
+	SR	pesama
+
+PLUGIN_AUDIOIN_ERR_MB_BUSY
+	EN	MusicBrainz is busy, try again in a moment.
+	SR	MusicBrainz je zauzet, pokušaj ponovo za trenutak.
+
+PLUGIN_AUDIOIN_ERR_MB_UNREACHABLE
+	EN	MusicBrainz cannot be reached (no internet?).
+	SR	MusicBrainz nije dostupan (nema interneta?).
+
+PLUGIN_AUDIOIN_ERR_MB_NO_QUERY
+	EN	Enter the artist and/or album first.
+	SR	Prvo upiši izvođača i/ili album.
+
+PLUGIN_AUDIOIN_ERR_MB_BAD_RESPONSE
+	EN	Unexpected answer from MusicBrainz.
+	SR	Neočekivan odgovor MusicBrainz-a.
+
+PLUGIN_AUDIOIN_UI_PICK_TITLE
+	EN	Move to library
+	SR	Premesti u biblioteku
+
+PLUGIN_AUDIOIN_UI_PICK_UP
+	EN	Up
+	SR	Gore
+
+PLUGIN_AUDIOIN_UI_PICK_ROOTS
+	EN	Music folders
+	SR	Muzički folderi
+
+PLUGIN_AUDIOIN_UI_PICK_FILTER
+	EN	Filter folders (e.g. artist name)
+	SR	Filtriraj foldere (npr. ime izvođača)
+
+PLUGIN_AUDIOIN_UI_PICK_NEW
+	EN	New folder in this location
+	SR	Nov folder na ovom mestu
+
+PLUGIN_AUDIOIN_UI_PICK_CREATE
+	EN	Create
+	SR	Napravi
+
+PLUGIN_AUDIOIN_UI_PICK_NAME
+	EN	Album folder name
+	SR	Naziv foldera albuma
+
+PLUGIN_AUDIOIN_UI_PICK_DEST
+	EN	Destination:
+	SR	Odredište:
+
+PLUGIN_AUDIOIN_UI_PICK_MOVE
+	EN	Move here
+	SR	Premesti ovde
+
+PLUGIN_AUDIOIN_UI_PICK_EMPTY
+	EN	No subfolders.
+	SR	Nema podfoldera.
+
+PLUGIN_AUDIOIN_UI_PICK_CHOOSE_FOLDER
+	EN	Open a music folder, then the artist folder.
+	SR	Otvori muzički folder, pa folder izvođača.
+
+PLUGIN_AUDIOIN_ERR_BAD_NAME
+	EN	Enter a folder name.
+	SR	Upiši naziv foldera.
+
+PLUGIN_AUDIOIN_ERR_SAME
+	EN	The album is already in that folder.
+	SR	Album je već u tom folderu.
+
+PLUGIN_AUDIOIN_ERR_NO_LIBRARY
+	EN	Lyrion has no music folder set.
+	SR	Lyrion nema podešen muzički folder.
+
+PLUGIN_AUDIOIN_UI_CANCEL
+	EN	Cancel
+	SR	Otkaži
+
+PLUGIN_AUDIOIN_UI_MOVE
+	EN	Move to library
+	SR	Premesti u biblioteku
+
+PLUGIN_AUDIOIN_UI_IN_LIBRARY
+	EN	In library:
+	SR	U biblioteci:
+
+PLUGIN_AUDIOIN_ERR_NO_EXPORT
+	EN	Export the album first.
+	SR	Prvo izvezi album.
+
+PLUGIN_AUDIOIN_ERR_EXISTS
+	EN	A folder with that name already exists there; nothing was changed.
+	SR	Tamo već postoji folder sa tim imenom; ništa nije promenjeno.
+
+PLUGIN_AUDIOIN_ERR_OUTSIDE_LIBRARY
+	EN	The destination must be inside a Lyrion music folder.
+	SR	Odredište mora biti unutar Lyrion muzičkog foldera.
+
+PLUGIN_AUDIOIN_ERR_OUTSIDE_RIPS
+	EN	The album is not in the recordings folder.
+	SR	Album nije u folderu za snimke.
+
+PLUGIN_AUDIOIN_ERR_NOT_FOUND
+	EN	Folder not found.
+	SR	Folder ne postoji.
+
+PLUGIN_AUDIOIN_ERR_MKDIR_FAILED
+	EN	The folder could not be created (permissions?).
+	SR	Folder nije mogao da se napravi (prava?).
+
+PLUGIN_AUDIOIN_ERR_MOVE_FAILED
+	EN	Moving failed; the album stayed where it was.
+	SR	Premeštanje nije uspelo; album je ostao gde je bio.
+
+PLUGIN_AUDIOIN_ERR_COPY_FAILED
+	EN	Copying to the library disk failed; the album stayed where it was.
+	SR	Kopiranje na disk biblioteke nije uspelo; album je ostao gde je bio.
+
+PLUGIN_AUDIOIN_ERR_TIMEOUT
+	EN	Moving took too long and was stopped.
+	SR	Premeštanje je trajalo predugo i prekinuto je.
+
+PLUGIN_AUDIOIN_MENU_LISTENING
+	EN	Playing the input on this player.
+	SR	Ulaz se pušta na ovom plejeru.
+
+PLUGIN_AUDIOIN_MENU_RECORDING
+	EN	Recording started.
+	SR	Snimanje je počelo.
+
+PLUGIN_AUDIOIN_MENU_MARKER_SET
+	EN	Marker set: new track.
+	SR	Marker postavljen: nova pesma.
+
+PLUGIN_AUDIOIN_MENU_PAUSED
+	EN	Recording paused.
+	SR	Snimanje je pauzirano.
+
+PLUGIN_AUDIOIN_MENU_RESUMED
+	EN	Recording continues.
+	SR	Snimanje se nastavlja.
+
+PLUGIN_AUDIOIN_MENU_STOPPED
+	EN	Recording stopped; tracks are suggested in the editor.
+	SR	Snimanje je zaustavljeno; pesme su predložene u editoru.
+
+PLUGIN_AUDIOIN_MENU_NEXT_PART
+	EN	Next side selected. Turn the record over and press Record.
+	SR	Izabrana je sledeća strana. Okreni ploču i pritisni Snimaj.

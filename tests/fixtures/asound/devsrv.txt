@@ -1,0 +1,9 @@
+ 0 [PCH            ]: HDA-Intel - HDA Intel PCH
+                      HDA Intel PCH at 0x6001120000 irq 143
+===
+00-00: ALC897 Analog : ALC897 Analog : playback 1 : capture 1
+00-02: ALC897 Alt Analog : ALC897 Alt Analog : capture 1
+00-03: HDMI 0 : HDMI 0 : playback 1
+00-07: HDMI 1 : HDMI 1 : playback 1
+00-08: HDMI 2 : HDMI 2 : playback 1
+00-09: HDMI 3 : HDMI 3 : playback 1

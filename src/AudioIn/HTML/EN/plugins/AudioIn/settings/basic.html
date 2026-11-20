@@ -1,0 +1,115 @@
+[% PROCESS settings/header.html %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_SOURCE" desc="PLUGIN_AUDIOIN_SET_SOURCE_DESC" %]
+		<select class="stdedit" name="pref_source" id="ai-source">
+			<option value="alsa" [% IF audioin.source == 'alsa' %]selected[% END %]>[% "PLUGIN_AUDIOIN_SET_SOURCE_ALSA" | string %]</option>
+			<option value="file" [% IF audioin.source == 'file' %]selected[% END %]>[% "PLUGIN_AUDIOIN_SET_SOURCE_FILE" | string %]</option>
+		</select>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_DEVICE" desc="PLUGIN_AUDIOIN_SET_DEVICE_DESC" %]
+		<select class="stdedit" name="pref_device" id="ai-device">
+			[% IF !audioinDevices.size %]<option value="">[% "PLUGIN_AUDIOIN_SET_NO_DEVICES" | string %]</option>[% END %]
+			[% FOREACH d IN audioinDevices %]
+			<option value="[% d.dev | html %]" [% IF audioin.device == d.dev %]selected[% END %]>[% d.label | html %]</option>
+			[% END %]
+		</select>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_CHANNELS" desc="PLUGIN_AUDIOIN_SET_CHANNELS_DESC" %]
+		<select class="stdedit" name="pref_inputMap" id="ai-map" data-value="[% audioin.inputMap | html %]"></select>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_RATE" desc="PLUGIN_AUDIOIN_SET_RATE_DESC" %]
+		<select class="stdedit" name="pref_rate" id="ai-rate" data-value="[% audioin.rate | html %]"></select>
+		<select class="stdedit" name="pref_format" id="ai-format" data-value="[% audioin.format | html %]"></select>
+		<div id="ai-caps" class="prefDesc"></div>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_TEST_FILE" desc="PLUGIN_AUDIOIN_SET_TEST_FILE_DESC" %]
+		<input type="text" class="stdedit" name="pref_testFile" value="[% audioin.testFile | html %]" size="60">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_SOURCE_TYPE" desc="PLUGIN_AUDIOIN_SET_SOURCE_TYPE_DESC" %]
+		<select class="stdedit" name="pref_sourceType">
+			[% FOREACH t IN audioinTypes %]
+			<option value="[% t.value | html %]" [% IF audioin.sourceType == t.value %]selected[% END %]>[% t.label | html %]</option>
+			[% END %]
+		</select>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_PREROLL" desc="PLUGIN_AUDIOIN_SET_PREROLL_DESC" %]
+		<input type="number" class="stdedit" name="pref_preroll" value="[% audioin.preroll | html %]" min="0" max="30" step="0.5">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_LISTEN_DELAY" desc="PLUGIN_AUDIOIN_SET_LISTEN_DELAY_DESC" %]
+		<input type="number" class="stdedit" name="pref_listenDelay" value="[% audioin.listenDelay | html %]" min="1" max="30" step="0.5">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_REACTION" desc="PLUGIN_AUDIOIN_SET_REACTION_DESC" %]
+		<input type="number" class="stdedit" name="pref_reaction" value="[% audioin.reaction | html %]" min="0" max="5" step="0.1">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_RING" desc="PLUGIN_AUDIOIN_SET_RING_DESC" %]
+		<input type="number" class="stdedit" name="pref_ringMinutes" value="[% audioin.ringMinutes | html %]" min="1" max="120" step="1">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_IDLE" desc="PLUGIN_AUDIOIN_SET_IDLE_DESC" %]
+		<input type="number" class="stdedit" name="pref_idleClose" value="[% audioin.idleClose | html %]" min="0" max="240" step="1">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_FLAC_LEVEL" desc="" %]
+		<input type="number" class="stdedit" name="pref_flacLevel" value="[% audioin.flacLevel | html %]" min="0" max="8" step="1">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_RIPS_DIR" desc="PLUGIN_AUDIOIN_SET_RIPS_DIR_DESC" %]
+		<input type="text" class="stdedit" name="pref_ripsDir" value="[% audioin.ripsDir | html %]" size="50" placeholder="[% audioinRipsDefault | html %]">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_AUDIOIN_SET_RES_TAG" desc="PLUGIN_AUDIOIN_SET_RES_TAG_DESC" %]
+		<input type="checkbox" name="pref_resTag" value="1" [% IF audioin.resTag %]checked[% END %]>
+	[% END %]
+
+<script type="application/json" id="ai-devs">[% audioinDevicesJson %]</script>
+<script type="application/json" id="ai-str">[% audioinStrings %]</script>
+<script>
+(function () {
+  var devs = JSON.parse(document.getElementById('ai-devs').textContent || '[]');
+  var S = JSON.parse(document.getElementById('ai-str').textContent || '{}');
+  var COMMON = [44100, 48000, 88200, 96000, 176400, 192000];
+  var FORMATS = ['S24_3LE', 'S32_LE', 'S24_LE', 'S16_LE'];
+  var dev = document.getElementById('ai-device'), map = document.getElementById('ai-map');
+  var rate = document.getElementById('ai-rate'), fmt = document.getElementById('ai-format');
+  function fill(sel, items, want) {
+    sel.innerHTML = '';
+    items.forEach(function (it) {
+      var o = document.createElement('option'); o.value = it[0]; o.textContent = it[1];
+      if (String(it[0]) === String(want)) o.selected = true;
+      sel.appendChild(o);
+    });
+    if (sel.selectedIndex < 0 && sel.options.length) sel.selectedIndex = 0;
+  }
+  function update(first) {
+    var d = devs.filter(function (x) { return x.dev === dev.value; })[0] || { formats: [], rates: [], channels: [] };
+    var n = d.channels.length ? d.channels[d.channels.length - 1] : 2;
+    var maps = [];
+    for (var i = 0; i + 1 < n; i += 2) maps.push([n + ':' + i + ':' + (i + 1), S.stereo + ' ' + (i + 1) + '-' + (i + 2)]);
+    for (var j = 0; j < n; j++) maps.push([n + ':' + j + ':' + j, S.mono + ' ' + (j + 1)]);
+    fill(map, maps, first ? map.getAttribute('data-value') : map.value);
+    var rates = d.rates.length ? d.rates : COMMON;
+    var wantRate = Number(first ? rate.getAttribute('data-value') : rate.value);
+    if (rates.indexOf(wantRate) < 0) {
+      var lower = rates.filter(function (r) { return r <= wantRate; });
+      wantRate = lower.length ? lower[lower.length - 1] : rates[0];
+    }
+    fill(rate, rates.map(function (r) { return [r, (r / 1000) + ' kHz']; }), wantRate);
+    var fmts = d.formats.length ? d.formats : FORMATS;
+    fill(fmt, fmts.map(function (f) { return [f, f]; }), first ? fmt.getAttribute('data-value') : fmts[0]);
+    document.getElementById('ai-caps').textContent = d.rates.length ? '' : S.unknown;
+  }
+  dev.addEventListener('change', function () { update(false); });
+  update(true);
+})();
+</script>
+
+[% PROCESS settings/footer.html %]

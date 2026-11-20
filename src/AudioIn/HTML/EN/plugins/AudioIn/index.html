@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="[% audioinLang | html %]">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>[% "PLUGIN_AUDIOIN" | string %]</title>
+<link rel="stylesheet" href="[% webroot %]plugins/AudioIn/audioin.css?v=[% audioinStamp %]">
+</head>
+<body>
+<script type="application/json" id="audioin-data">[% audioinData %]</script>
+<main class="wrap">
+  <header class="top">
+    <h1 id="h-title"></h1>
+  </header>
+  <div id="msg" class="msg" role="status" hidden></div>
+
+  <section class="card" aria-labelledby="in-h">
+    <div class="row between">
+      <h2 id="in-h" data-t="UI_INPUT"></h2>
+      <span id="in-state" class="muted"></span>
+    </div>
+    <div class="meter" aria-label="level">
+      <div class="mrow"><span class="ch">L</span><div class="bar"><div id="m-l" class="fill"></div><div id="m-lp" class="peak"></div></div><span id="m-lv" class="val"></span></div>
+      <div class="mrow"><span class="ch">R</span><div class="bar"><div id="m-r" class="fill"></div><div id="m-rp" class="peak"></div></div><span id="m-rv" class="val"></span></div>
+      <div class="scale"><span style="left:0">-60</span><span style="left:50%">-30</span><span style="left:80%">-12</span><span style="left:90%">-6</span><span style="right:0">0 dBFS</span></div>
+    </div>
+    <p id="in-info" class="muted"></p>
+    <div class="row">
+      <button id="b-open" data-t="UI_OPEN"></button>
+      <button id="b-close" data-t="UI_CLOSE" class="ghost"></button>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="ls-h">
+    <h2 id="ls-h" data-t="UI_LISTEN"></h2>
+    <div class="row">
+      <label><span data-t="UI_PLAYER"></span> <select id="player"></select></label>
+      <button id="b-listen" data-t="UI_LISTEN"></button>
+      <button id="b-live" data-t="UI_LIVE" class="ghost"></button>
+    </div>
+    <p id="ls-info" class="muted"></p>
+  </section>
+
+  <section class="card" aria-labelledby="rc-h">
+    <div class="row between">
+      <h2 id="rc-h" data-t="UI_RECORDING"></h2>
+      <span id="rc-time" class="time"></span>
+    </div>
+    <p id="rc-session" class="muted"></p>
+    <div class="row">
+      <label><span data-t="UI_PART"></span> <select id="part"></select></label>
+    </div>
+    <div class="row big">
+      <button id="b-rec" class="rec" data-t="UI_RECORD"></button>
+      <button id="b-pause" data-t="UI_PAUSE"></button>
+      <button id="b-marker" data-t="UI_MARKER"></button>
+      <button id="b-stop" data-t="UI_STOP"></button>
+      <button id="b-next" data-t="UI_NEXT_PART" class="ghost"></button>
+    </div>
+    <p id="rc-info" class="muted"></p>
+  </section>
+
+  <section class="card" aria-labelledby="ss-h">
+    <h2 id="ss-h" data-t="UI_SESSION"></h2>
+    <form id="sess-form" class="grid">
+      <label><span data-t="UI_TYPE"></span>
+        <select id="s-type">
+          <option value="vinyl" data-t="UI_TYPE_VINYL"></option>
+          <option value="cassette" data-t="UI_TYPE_CASSETTE"></option>
+          <option value="radio" data-t="UI_TYPE_RADIO"></option>
+          <option value="live" data-t="UI_TYPE_LIVE"></option>
+          <option value="other" data-t="UI_TYPE_OTHER"></option>
+        </select></label>
+      <label><span data-t="UI_ARTIST"></span> <input id="s-artist" autocomplete="off"></label>
+      <label><span data-t="UI_ALBUM"></span> <input id="s-album" autocomplete="off"></label>
+      <label><span data-t="UI_YEAR"></span> <input id="s-year" inputmode="numeric" maxlength="4" autocomplete="off"></label>
+      <div class="row">
+        <button type="submit" id="b-save" data-t="UI_SAVE"></button>
+        <button type="button" id="b-new" data-t="UI_NEW_SESSION" class="ghost"></button>
+        <button type="button" id="b-mb" data-t="UI_MB_SEARCH" class="ghost"></button>
+      </div>
+    </form>
+    <div id="mb" hidden>
+      <p id="mb-info" class="muted"></p>
+      <ul id="mb-list" class="list mb-list"></ul>
+    </div>
+    <img id="s-cover" class="cover" alt="" hidden>
+    <div id="parts"></div>
+    <div id="exports"></div>
+  </section>
+
+  <section class="card" id="editor" aria-labelledby="ed-h" hidden>
+    <div class="row between">
+      <h2 id="ed-h"></h2>
+      <button id="ed-close" class="ghost" data-t="UI_CLOSE_EDITOR"></button>
+    </div>
+    <p id="ed-info" class="muted"></p>
+    <div class="wave-wrap">
+      <canvas id="wave" height="140"></canvas>
+    </div>
+    <div class="row">
+      <button id="ed-zoom-in" class="ghost icon" aria-label="zoom in">+</button>
+      <button id="ed-zoom-out" class="ghost icon" aria-label="zoom out">&minus;</button>
+      <span id="ed-cursor" class="muted"></span>
+      <button id="ed-add" class="ghost" data-t="UI_ADD_SPLIT"></button>
+      <button id="ed-analyze" class="ghost" data-t="UI_ANALYZE"></button>
+    </div>
+    <p class="muted small" data-t="UI_EDITOR_HELP"></p>
+    <table class="tracks">
+      <thead><tr><th>#</th><th data-t="UI_KEEP"></th><th data-t="UI_START"></th><th data-t="UI_LENGTH"></th><th data-t="UI_TITLE"></th><th></th></tr></thead>
+      <tbody id="ed-tracks"></tbody>
+    </table>
+    <div class="row">
+      <button id="ed-save" data-t="UI_SAVE"></button>
+      <button id="ed-export" data-t="UI_EXPORT"></button>
+      <span id="ed-export-info" class="muted"></span>
+    </div>
+  </section>
+
+  <section class="card" aria-labelledby="ls2-h">
+    <h2 id="ls2-h" data-t="UI_SESSIONS"></h2>
+    <ul id="sessions" class="list"></ul>
+  </section>
+</main>
+<script src="[% webroot %]plugins/AudioIn/folderpick.js?v=[% audioinStamp %]"></script>
+<script src="[% webroot %]plugins/AudioIn/audioin.js?v=[% audioinStamp %]"></script>
+</body>
+</html>

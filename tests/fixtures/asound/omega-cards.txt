@@ -1,0 +1,4 @@
+ 0 [S112           ]: USB-Audio - SMSL M8A 1.1.2
+                      SMSL SMSL M8A 1.1.2 at usb-0000:00:14.0-4, high speed
+ 1 [Omega          ]: USB-Audio - Lexicon Omega
+                      Lexicon Lexicon Omega at usb-0000:00:14.0-3, full speed
