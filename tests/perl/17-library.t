@@ -66,6 +66,31 @@ is($err, 'exists', 'postoji: nikad se ne prepisuje');
 is($err, 'outside_library', 'odrediste van biblioteke');
 (undef, $err) = Plugins::AudioIn::Library::plan_move_to("$root/x/y", "$cd/Enigma", undef, $rips, \@media);
 is($err, 'outside_rips', 'izvor van rip foldera');
+# odrediste samo za citanje (npr. mrezno deljenje montirano ro): not_writable pre kopiranja
+$mk->("$cd/RO");
+chmod 0555, $fs->("$cd/RO");
+SKIP: {
+	skip 'folder 0555 je i dalje upisiv (root ili FS bez prava)', 1 if -w $fs->("$cd/RO");
+	(undef, $err) = Plugins::AudioIn::Library::plan_move_to("$rips/Enigma/The Cross of Changes", "$cd/RO", undef, $rips, \@media);
+	is($err, 'not_writable', 'odrediste samo za citanje: not_writable');
+}
+chmod 0755, $fs->("$cd/RO");
+
+# drugi disk (EXDEV): cp -R u .part (bez -a/-p: exFAT/NTFS/SMB ne dozvoljavaju chown), pa rename
+{
+	require POSIX;
+	$mk->("$rips/X/Album");
+	open(my $af, '>', $fs->("$rips/X/Album/01.flac")) or die; print {$af} 'flac'; close $af;
+	my (@argv, @res);
+	Plugins::AudioIn::Library::move_async("$rips/X/Album", "$cd/X/Album",
+		rename  => sub { $! = POSIX::EXDEV(); 0 },
+		spawn   => sub { my ($a, $c) = @_; push @argv, [@$a]; $c->(system(@$a) >> 8) },
+		on_done => sub { @res = @_ });
+	is_deeply([ @{ $argv[0] }[0 .. 2] ], [ 'cp', '-R', '--' ], 'EXDEV: cp -R');
+	ok(!(grep { /^-(?:a|p)\z|^--preserve/ } @{ $argv[0] }), 'EXDEV: vlasnik i prava se ne prenose');
+	ok($res[0], 'EXDEV: premesteno') or diag $res[1];
+	ok(-f $fs->("$cd/X/Album/01.flac") && !-d $fs->("$rips/X/Album"), 'EXDEV: kopija na odredistu, izvor obrisan');
+}
 
 # celo premestanje (isti FS)
 my ($ok, $merr) = Plugins::AudioIn::Library::move("$rips/Enigma/The Cross of Changes", "$cd/Enigma/The Cross of Changes", rips_root => $rips);

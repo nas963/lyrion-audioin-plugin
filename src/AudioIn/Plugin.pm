@@ -539,12 +539,13 @@ sub _cli_move {
 	return _done($request, 0, { error => $err }) if $err;
 	my $src = $ex->{dir};
 	$MOVING{$sid} = 1;
-	my ($timed_out, @sync);
+	my ($timed_out, @sync, @cp_out);
 	Plugins::AudioIn::Library::move_async($src, $dest,
 		rips_root => _rips_dir(),
 		spawn     => sub {
 			my ($argv, $on_exit) = @_;
-			my $job = Plugins::AudioIn::Jobs->spawn(argv => [ Plugins::AudioIn::Jobs::low_prio(@$argv) ], on_exit => $on_exit);
+			my $job = Plugins::AudioIn::Jobs->spawn(argv => [ Plugins::AudioIn::Jobs::low_prio(@$argv) ], on_exit => $on_exit,
+				on_line => sub { push @cp_out, $_[0]; shift @cp_out if @cp_out > 5 });    # poruke cp-a za log
 			_timer(MOVE_LIMIT, sub { $timed_out = 1; $job->kill if $job->is_running });
 		},
 		on_done => sub {
@@ -561,7 +562,7 @@ sub _cli_move {
 			elsif ($e) { $e->{move_error} = $timed_out ? 'timeout' : ($merr || 'move_failed') }
 			$SESSIONS->save($fresh) if $fresh;
 			$STATE->_changed if $STATE;
-			return $log->error("premestanje u biblioteku: " . ($merr || 'move_failed')) unless $ok;
+			return $log->error("premestanje u biblioteku: " . ($merr || 'move_failed') . (@cp_out ? ' | ' . join(' | ', @cp_out) : '')) unless $ok;
 			Plugins::AudioIn::Library::rescan_when_idle($dest,
 				still_scanning => sub { eval { Slim::Music::Import->stillScanning } ? 1 : 0 },
 				timer          => sub { _timer(@_); return },

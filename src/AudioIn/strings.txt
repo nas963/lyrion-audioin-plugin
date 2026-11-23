@@ -602,6 +602,10 @@ PLUGIN_AUDIOIN_ERR_COPY_FAILED
 	EN	Copying to the library disk failed; the album stayed where it was.
 	SR	Kopiranje na disk biblioteke nije uspelo; album je ostao gde je bio.
 
+PLUGIN_AUDIOIN_ERR_NOT_WRITABLE
+	EN	The selected music folder is read-only (e.g. a network share mounted read-only); the album stayed where it was.
+	SR	U izabrani muzički folder ne može da se piše (npr. mrežno deljenje samo za čitanje); album je ostao gde je bio.
+
 PLUGIN_AUDIOIN_ERR_TIMEOUT
 	EN	Moving took too long and was stopped.
 	SR	Premeštanje je trajalo predugo i prekinuto je.
