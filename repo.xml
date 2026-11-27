@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extensions>
+  <details>
+    <title lang="EN">Audio In</title>
+  </details>
+  <plugins>
+    <plugin name="AudioIn" version="0.1.0" minTarget="8.0" maxTarget="*">
+      <title lang="EN">Audio In</title>
+      <title lang="SR">Audio ulaz</title>
+      <desc lang="EN">Listen to and record an analog source (turntable, cassette, tuner...) connected to the server's sound card.</desc>
+      <desc lang="SR">Slušanje i snimanje analognog izvora (gramofon, kasetofon, tjuner...) priključenog na zvučnu karticu servera.</desc>
+      <creator>nas963</creator>
+      <category>tools</category>
+      <link>https://github.com/nas963/lyrion-audioin-plugin</link>
+      <url>https://github.com/nas963/lyrion-audioin-plugin/releases/download/v0.1.0/AudioIn-0.1.0.zip</url>
+      <sha>499fc774b2761bcfb6a0f8b4d9ec32c65b94577e</sha>
+    </plugin>
+  </plugins>
+</extensions>
