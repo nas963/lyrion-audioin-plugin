@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 # Instalira plugin AudioIn (Audio ulaz). Pokrece se kao root iz raspakovanog paketa:
 #   sudo bash install.sh
-# Na kraju restartuje Lyrion, sto prekida reprodukciju na svim plejerima.
+# Plugin ide tamo gde ga stavlja i Lyrion (cache/InstalledPlugins) i upisuje se u Lyrion sa svojim
+# repozitorijumom, pa ga Lyrion posle azurira sam, kao bilo koji drugi plugin. Ova skripta je potrebna
+# samo jednom, zbog sistemskog dela (tmpfiles, grupa audio) koji Lyrion ne moze sam.
+# Lyrion stoji dok se menjaju plugin i podesavanja, sto prekida reprodukciju na svim plejerima.
 # Pakete (alsa-utils, flac) ne instalira sam: samo ispise sta fali.
 set -euo pipefail
 
 STAGE="$(cd "$(dirname "$0")" && pwd)"
-PLUGIN_ROOT=/var/lib/squeezeboxserver/Plugins
-PLUGIN="$PLUGIN_ROOT/AudioIn"
+LMS=/var/lib/squeezeboxserver
+INSTALLED="$LMS/cache/InstalledPlugins/Plugins"
+PLUGIN="$INSTALLED/AudioIn"
+OLD_PLUGIN="$LMS/Plugins/AudioIn"    # rucna instalacija: Lyrion je ne azurira
+EXT_PREFS="$LMS/prefs/plugin/extensions.prefs"
+REPO_URL=https://nas963.github.io/lyrion-audioin-plugin/repo.xml
 
 # alat -> Debian paket
 TOOLS="arecord:alsa-utils flac:flac metaflac:flac"
@@ -17,20 +24,28 @@ command -v systemctl >/dev/null || { echo "Paket je za Debian/Ubuntu sa systemd-
 systemctl cat lyrionmusicserver >/dev/null 2>&1 || { echo "Nije nadjen servis lyrionmusicserver."; exit 1; }
 [ -f "$STAGE/AudioIn/install.xml" ] || { echo "Nema plugina u $STAGE"; exit 1; }
 
-echo "Ova instalacija na kraju restartuje Lyrion (reprodukcija se prekida)."
+command -v python3 >/dev/null || { echo "Potreban je python3."; exit 1; }
+echo "Lyrion se zaustavlja dok traje instalacija (reprodukcija se prekida)."
 
-trap 'echo "GREŠKA: instalacija nije završena. Vraćanje: curl -fsSL https://github.com/nas963/lyrion-audioin-plugin/releases/latest/download/get.sh | sudo bash -s uninstall"' ERR
+trap 'echo "GREŠKA: instalacija nije završena. Vraćanje: curl -fsSL https://github.com/nas963/lyrion-audioin-plugin/releases/latest/download/get.sh | sudo bash -s uninstall"; systemctl start lyrionmusicserver || true' ERR
 
 # Plugin: vlasnik squeezeboxserver, folderi 755, fajlovi 644, audioin-tap izvrsan (LMS ga trazi sa -x).
-mkdir -p "$PLUGIN_ROOT"
-chown squeezeboxserver:nogroup "$PLUGIN_ROOT"
+# Plugin: kao da ga je instalirao Lyrion, i upis u extensions.prefs (plugin + repozitorijum).
+# Lyrion mora da stoji: pri gasenju upisuje svoje prefs.
+systemctl stop lyrionmusicserver
+rm -rf "$OLD_PLUGIN"
+mkdir -p "$INSTALLED"
+chown squeezeboxserver:nogroup "$LMS/cache/InstalledPlugins" "$INSTALLED"
 rm -rf "$PLUGIN"
 cp -r "$STAGE/AudioIn" "$PLUGIN"
 chown -R squeezeboxserver:nogroup "$PLUGIN"
 find "$PLUGIN" -type d -exec chmod 755 {} +
 find "$PLUGIN" -type f -exec chmod 644 {} +
 chmod 755 "$PLUGIN/Bin/audioin-tap"
-echo "Plugin je u $PLUGIN"
+install -d -o squeezeboxserver -g nogroup -m 755 "$(dirname "$EXT_PREFS")"
+python3 "$STAGE/lms-repo.py" add "$EXT_PREFS" AudioIn "$REPO_URL"
+chown squeezeboxserver:nogroup "$EXT_PREFS"
+echo "Plugin je u $PLUGIN; azurira ga Lyrion (repozitorijum $REPO_URL)."
 
 # Folder za socket pomocnog procesa (u RAM-u); bez njega plugin koristi /dev/shm/audioin.
 if [ -f "$STAGE/system/tmpfiles-audioin.conf" ]; then
@@ -61,6 +76,6 @@ if [ -n "$missing" ]; then
     echo
 fi
 
-systemctl restart lyrionmusicserver
+systemctl start lyrionmusicserver
 systemctl is-active lyrionmusicserver
 echo "INSTALIRANO"

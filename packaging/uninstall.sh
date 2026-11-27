@@ -4,8 +4,12 @@
 # Restartuje Lyrion. Snimljeni albumi (AudioIn-Rips) ostaju, a korisnik squeezeboxserver ostaje u grupi audio.
 set -euo pipefail
 
+STAGE="$(cd "$(dirname "$0")" && pwd)"
 PREFS=/var/lib/squeezeboxserver/prefs
-PLUGIN=/var/lib/squeezeboxserver/Plugins/AudioIn
+PLUGIN=/var/lib/squeezeboxserver/cache/InstalledPlugins/Plugins/AudioIn
+OLD_PLUGIN=/var/lib/squeezeboxserver/Plugins/AudioIn
+EXT_PREFS="$PREFS/plugin/extensions.prefs"
+REPO_URL=https://nas963.github.io/lyrion-audioin-plugin/repo.xml
 CUSTOM="$PREFS/material-skin/custom.js"
 
 # Uklanja samo AudioIn blok iz fajla (od "// AudioIn start" do "// AudioIn end"); ostalo se ne dira.
@@ -36,7 +40,12 @@ remove_audioin_block() {
 main() {
     [ "$(id -u)" -eq 0 ] || { echo "Pokreni kao root: sudo bash uninstall.sh"; exit 1; }
 
-    rm -rf "$PLUGIN"
+    # Lyrion stoji dok se menjaju plugin i prefs (pri gasenju upisuje svoje prefs)
+    systemctl stop lyrionmusicserver
+    rm -rf "$PLUGIN" "$OLD_PLUGIN"
+    if [ -f "$EXT_PREFS" ] && [ -f "$STAGE/lms-repo.py" ]; then
+        python3 "$STAGE/lms-repo.py" remove "$EXT_PREFS" AudioIn "$REPO_URL"
+    fi
     rm -f /etc/tmpfiles.d/audioin.conf
     rm -rf /run/audioin /dev/shm/audioin
 
@@ -45,7 +54,7 @@ main() {
     fi
 
     echo "Snimci i albumi (AudioIn-Rips) i korisnik u grupi audio ostaju netaknuti."
-    systemctl restart lyrionmusicserver
+    systemctl start lyrionmusicserver
     systemctl is-active lyrionmusicserver
     echo "UKLONJENO"
 }

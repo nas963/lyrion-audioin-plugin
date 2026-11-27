@@ -32,8 +32,12 @@ curl -fsSL https://github.com/nas963/lyrion-audioin-plugin/releases/latest/downl
 ```
 
 Skripta preuzima paket, proverava mu otisak, instalira plugin, dodaje korisnika `squeezeboxserver` u grupu
-`audio`, pravi `/run/audioin` i restartuje Lyrion. Potrebni alati (Debian paketi): `alsa-utils`, `flac`.
+`audio` i pravi `/run/audioin`. Lyrion se za to vreme zaustavi. Potrebni alati (Debian paketi): `alsa-utils`, `flac`.
 Ako fale, skripta ispiše komandu za instalaciju.
+
+Skripta je potrebna samo jednom. Plugin ide tamo gde Lyrion drži pluginove iz repozitorijuma, a u Lyrion se
+upisuje repozitorijum `https://nas963.github.io/lyrion-audioin-plugin/repo.xml`. Posle toga Lyrion sam
+ažurira plugin, kao bilo koji drugi (Podešavanja → Plugins).
 
 Zatim u **Podešavanja → Audio In** izaberi zvučnu karticu, ulaze i rezoluciju. Nude se samo ulazi i
 frekvencije koje kartica stvarno ima.

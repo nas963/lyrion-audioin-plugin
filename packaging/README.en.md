@@ -32,8 +32,12 @@ curl -fsSL https://github.com/nas963/lyrion-audioin-plugin/releases/latest/downl
 ```
 
 The script downloads the package, checks its checksum, installs the plugin, adds the `squeezeboxserver`
-user to the `audio` group, creates `/run/audioin` and restarts Lyrion. Required tools (Debian packages):
-`alsa-utils`, `flac`. If they are missing, the script prints the install command.
+user to the `audio` group and creates `/run/audioin`. Lyrion is stopped while it runs. Required tools
+(Debian packages): `alsa-utils`, `flac`. If they are missing, the script prints the install command.
+
+You only need the script once. The plugin goes where Lyrion keeps plugins from repositories, and the
+repository `https://nas963.github.io/lyrion-audioin-plugin/repo.xml` is added to Lyrion. After that Lyrion
+updates the plugin itself, like any other (Settings → Plugins).
 
 Then choose the sound card, inputs and resolution in **Settings → Audio In**. Only the inputs and sample
 rates the card really has are offered.
